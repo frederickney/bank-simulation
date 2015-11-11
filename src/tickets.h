@@ -12,14 +12,12 @@ typedef struct {
 	sem_t sem_current_id;
 } tickets_t;
 
-tickets_t get_tickets_t()
-{
-	tickets_t tickets;
-	tickets.count = 0;
-	tickets.current = 0;
-	sem_init(&tickets.sem_count_id, 0, 1);
-	sem_init(&tickets.sem_current_id, 0, 1);
-	return &tickets;
-}
+tickets_t get_tickets_t();
+
+unsigned int get_ticket(tickets_t *ticket);
+
+unsigned int set_current(tickets_t ticket);
+
+unsigned int get_current(tickets_t ticket);
 
 #endif //TICKETS_H
