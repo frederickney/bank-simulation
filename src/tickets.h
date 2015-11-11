@@ -16,8 +16,8 @@ tickets_t get_tickets_t();
 
 unsigned int get_ticket(tickets_t *ticket);
 
-unsigned int set_current(tickets_t ticket);
+unsigned int set_current(tickets_t *ticket);
 
-unsigned int get_current(tickets_t ticket);
+unsigned int get_current(tickets_t *ticket);
 
 #endif //TICKETS_H
