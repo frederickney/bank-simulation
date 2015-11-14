@@ -5,10 +5,9 @@
 
 
 typedef struct {
-	unsigned int count
+	unsigned int count;
 	sem_t sem_count_id;
-	unsigned int current
-	sem_t sem_current_id;
+	unsigned int current;
 	sem_t sem_current_id;
 } tickets_t;
 
