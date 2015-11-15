@@ -2,6 +2,8 @@
 #define CLIENT_H
 
 #include<pthread.h>
+#include<stdlib.h>
+#include"tickets.h"
 
 typedef struct {
 	unsigned int ticket;
@@ -9,8 +11,8 @@ typedef struct {
 	double probability_of_waiting;
 } customers_t;
 
-void *customers(void argv);
+void *customers(void *argv);
 
-void create_customers(int nb_customers);
+pthread_t *create_customers(int nb_customers, tickets_t tickets);
 
 #endif // CLIENT_H

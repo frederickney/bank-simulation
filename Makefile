@@ -10,7 +10,7 @@ OBJ=src/bank.o src/clients.o src/tickets.o
 all: CFLAGS += -g
 all: $(EXE)
 
-release: CFLAGS += -03
+release: CFLAGS += -O3
 release: $(EXE)
 $(EXE): src/main.o $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
