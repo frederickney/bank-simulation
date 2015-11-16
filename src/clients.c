@@ -4,6 +4,7 @@
 void *customer(void *argv) {
 	customers_t *customer_data = (customers_t *) argv;
 	while(true) {
+		//TODO customer
 	}
 }
 

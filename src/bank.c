@@ -5,6 +5,7 @@
 void *banker(void *argv) {
 	tickets_t *tickets = (tickets_t *) argv;
 	while(true) {
+		//TODO banker
 	}
 }
 
