@@ -4,6 +4,8 @@
 
 void *banker(void *argv){
 	tickets_t *tickets = (tickets_t *) argv;
+	while(true){
+	}
 }
 
 pthread_t *create_banks(tickets_t *tickets){

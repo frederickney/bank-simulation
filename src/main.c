@@ -22,14 +22,14 @@ int main (int argc, char **argv) {
 		return EXIT_FAILURE;
 	}
 	double prob = atof(argv[3]);
-	unsigned int time = atoi(argv[2]);
+	unsigned int serve_time = atoi(argv[2]);
 	unsigned int nb_customers = atoi(argv[1]);
 
 	pthread_t * customers;
 	pthread_t * banker;
 	tickets_t tickets = get_tickets_t();
-	tickets.
-	customers = create_customers(nb_customers, &tickets);
+	tickets.serve_time = serve_time;
+	customers = create_customers(nb_customers, &tickets, prob);
 	banker = create_banks(&tickets);
 
 	for (int i = 0; i < nb_customers; i++) {
