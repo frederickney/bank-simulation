@@ -9,19 +9,25 @@ tickets_t get_tickets_t() {
 	return tickets;
 }
 unsigned int get_ticket(tickets_t *ticket) {
+	int count;
 	sem_wait(&(ticket->sem_count_id));
-	return (ticket->count++);
+	count = ticket->count++;
 	sem_post(&(ticket->sem_count_id));
+	return count;
 }
 
 unsigned int set_current(tickets_t *ticket) {
+	int current;
 	sem_wait(&(ticket->sem_current_id));
-	return (ticket->current++);
+	current = ticket->current++;
 	sem_post(&(ticket->sem_current_id));
+	return current;
 }
 
 unsigned int get_current(tickets_t *ticket) {
-	sem_wait(&(ticket->sem_current_id));
-  return (ticket->current);
+	int current;
+  sem_wait(&(ticket->sem_current_id));
+  current = ticket->current;
   sem_post(&(ticket->sem_current_id));
+  return current;
 }

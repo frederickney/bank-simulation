@@ -46,6 +46,6 @@ int main (int argc, char **argv) {
 
 	free(customers);
 	free(banker);
-	
+
 	return EXIT_SUCCESS;
 }
