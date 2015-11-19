@@ -2,7 +2,7 @@
 
 tickets_t get_tickets_t() {
 	tickets_t tickets;
-	tickets.count = 0;
+	tickets.count = 1;
 	tickets.current = 0;
 	sem_init(&tickets.sem_count_id, 0, 1);
 	sem_init(&tickets.sem_current_id, 0, 1);
