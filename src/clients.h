@@ -6,12 +6,12 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include"tickets.h"
+#include"list.h"
 
 typedef struct {
-	unsigned int ticket;
-	unsigned int walking;
 	double prob;
 	tickets_t *tickets;
+	list_t *client;
 } customers_t;
 
 void *customers(void *argv);
