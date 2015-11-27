@@ -5,8 +5,8 @@ void *customer(void *argv) {
 	customers_t *customer_data = (customers_t *) argv;
 	while(true) {
 		//TODO customer
-		customer_data->client->ticket = get_ticket((customer_data->tickets));
-		printf("%d\n", (customer_data->client->ticket));
+		customer_data->ticket = get_ticket((customer_data->tickets));
+		printf("%d\n", (customer_data->ticket));
 	}
 }
 
