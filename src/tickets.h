@@ -2,6 +2,7 @@
 #define TICKETS_H
 
 #include<semaphore.h>
+#include"list.h"
 
 
 typedef struct {
@@ -10,6 +11,8 @@ typedef struct {
 	unsigned int current;
 	sem_t sem_current_id;
 	unsigned int serve_time;
+	sem_t sem_banker;
+	list_t *customers_list;
 } tickets_t;
 
 tickets_t get_tickets_t();

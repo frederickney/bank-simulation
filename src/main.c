@@ -5,6 +5,7 @@
 #include"clients.h"
 #include"bank.h"
 #include"tickets.h"
+#include"list.h"
 
 const char *USAGE =
   "usage:\n"
@@ -30,11 +31,14 @@ int main (int argc, char **argv) {
 	pthread_t * banker;
 	tickets_t tickets = get_tickets_t();
 	tickets.serve_time = serve_time;
+	tickets.customers_list = malloc (sizeof (list_t) * nb_customers);
+	sem_init(&(tickets.sem_banker), 0, 0);
 	customers = create_customers(nb_customers, &tickets, prob);
 	banker = create_banks(&tickets);
 
 	for (int i = 0; i < nb_customers; i++) {
 		if (pthread_join(customers[i] , NULL) != 0) {
+			printf("%d\n",i);
 			perror("Thread join error");
 			exit(EXIT_FAILURE);
 		}
@@ -43,7 +47,7 @@ int main (int argc, char **argv) {
 		perror("Thread join error");
 		exit(EXIT_FAILURE);
 	}
-
+	free((tickets.customers_list));
 	free(customers);
 	free(banker);
 

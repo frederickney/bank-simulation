@@ -4,7 +4,7 @@
 #include<semaphore.h>
 
 typedef struct{
-	sem_t sem_client;
+	sem_t sem_customer;
 	short unsigned int in_bank;
 	unsigned int ticket;
 
