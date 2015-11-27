@@ -31,6 +31,7 @@ int main (int argc, char **argv) {
 	pthread_t * banker;
 	tickets_t tickets = get_tickets_t();
 	tickets.serve_time = serve_time;
+	tickets.nb_customers = nb_customers;
 	tickets.customers_list = malloc (sizeof (list_t) * nb_customers);
 	sem_init(&(tickets.sem_banker), 0, 0);
 	customers = create_customers(nb_customers, &tickets, prob);

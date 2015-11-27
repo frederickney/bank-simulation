@@ -8,6 +8,8 @@ void *customer(void *argv) {
 		//TODO customer
 		customer_data->customer->ticket = get_ticket((customer_data->tickets));
 		printf("%d\n", (customer_data->customer->ticket));
+		sem_post(&(customer_data->tickets->sem_banker));
+		sem_wait(&(customer_data->customer->sem_customer));
 	}
 }
 

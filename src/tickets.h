@@ -11,6 +11,7 @@ typedef struct {
 	unsigned int current;
 	sem_t sem_current_id;
 	unsigned int serve_time;
+	int nb_customers;
 	sem_t sem_banker;
 	list_t *customers_list;
 } tickets_t;
