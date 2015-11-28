@@ -3,7 +3,7 @@ include Makefile.inc
 CFLAGS=-Wall -pedantic -std=c11 -D_POSIX_C_SOURCE=199309L
 LDFLAGS=-lrt -lpthread
 EXE=simulate_bank
-OBJ=src/bank.o src/clients.o src/tickets.o src/list.o
+OBJ=src/bank.o src/clients.o src/tickets.o src/functions.o
 
 .PHONY: clean
 

@@ -5,8 +5,10 @@
 #include<pthread.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include <unistd.h>
 #include"tickets.h"
 #include"list.h"
+#include"functions.h"
 
 typedef struct {
 	double prob;
@@ -14,8 +16,8 @@ typedef struct {
 	list_t *customer;
 } customers_t;
 
-void *customers(void *argv);
+void *customers (void *argv);
 
-pthread_t *create_customers(int nb_customers, tickets_t *tickets, double prob);
+pthread_t *create_customers (int nb_customers, tickets_t *tickets, double prob, list_t *customers_list);
 
-#endif // CLIENT_H
+#endif //CLIENT_H
