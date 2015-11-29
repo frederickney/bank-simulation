@@ -12,6 +12,9 @@ typedef struct {
 	unsigned int serve_time;
 	sem_t sem_banker;
 	int nb_bankers;
+	sem_t initializing_bank;
+	unsigned int nb_customers_waiting;
+	sem_t customers_waiting;
 } tickets_t;
 
 tickets_t get_tickets_t();
@@ -21,5 +24,9 @@ unsigned int get_ticket (tickets_t *ticket);
 unsigned int set_current (tickets_t *ticket);
 
 unsigned int get_current (tickets_t *ticket);
+
+void initialize(tickets_t *ticket);
+
+unsigned int get_waiting_customers (tickets_t *ticket);
 
 #endif //TICKETS_H

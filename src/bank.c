@@ -3,7 +3,6 @@
 
 void *banker (void *argv) {
 	banker_t *bankers_data = (banker_t *) argv;
-	int serve_customers;
 	unsigned short int in_bank;
 	while (true) {
 		//TODO banker
@@ -14,17 +13,25 @@ void *banker (void *argv) {
 			// consulting array of list_t structure for calling the right customer
 			if (bankers_data->customers_list[i].ticket == bankers_data->current) {
 				in_bank = bankers_data->customers_list[i].in_bank; // testing if the customer is in bank see next if statement
-				serve_customers = i; // remembering the right customer
+				bankers_data->serve_customer = i; // remembering the right customer
+				//printf ("%d / ", bankers_data->serve_customer);
 				break;
 			}
 		}
 		if (in_bank) {
-			//printf ("calling %d\n", bankers_data->customers_list[serve_customers].ticket);
+			//printf ("calling %d %d\n", bankers_data->customers_list[bankers_data->serve_customer].ticket, bankers_data->serve_customer);
 			sleep (bankers_data->tickets->serve_time); // serving customers
-			sem_post (&(bankers_data->customers_list[serve_customers].sem_customer)); // making out the customer
+			sem_post (&(bankers_data->customers_list[bankers_data->serve_customer].sem_customer)); // making out the customer
 			sem_wait (&(bankers_data->tickets->sem_banker)); // waiting for the next customers into list
 		}
 		else if (!in_bank) {
+			if (bankers_data->tickets->current == 0) {
+				for (int i = 0; i < get_waiting_customers (bankers_data->tickets); i++) {
+					sem_post (&(bankers_data->tickets->initializing_bank));
+					//printf("%d un-wait\n", i);
+				}
+				bankers_data->tickets->nb_customers_waiting = 0;
+			}
 			sem_wait (&(bankers_data->tickets->sem_banker));// initial waiting for the first customers into list
 		}
 	}

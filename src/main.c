@@ -30,7 +30,7 @@ int main (int argc, char **argv) {
 	pthread_t *customers;
 	pthread_t *banker;
 	list_t *customers_list;
-	banker_t bankers_data;
+	banker_t *bankers_data;
 	tickets_t tickets;
 	// allocating memory
 	customers_list = malloc (sizeof (list_t) * nb_customers);
@@ -38,15 +38,23 @@ int main (int argc, char **argv) {
 	tickets = get_tickets_t();
 	tickets.serve_time = serve_time;
 	sem_init (&(tickets.sem_banker), 0, 0); // initializing semaphore for banker(s) to 0 for waiting for clients
-	bankers_data.customers_list = customers_list;
-	bankers_data.tickets = &tickets;
-	bankers_data.nb_customers = nb_customers;
-	if (argc == 5)
+	if (argc == 5) {
 		tickets.nb_bankers = atoi (argv[4]);
+		tickets.current = (1 - tickets.nb_bankers);
+		bankers_data = malloc (sizeof (banker_t) * tickets.nb_bankers);
+	}
+	else {
+		bankers_data = malloc (sizeof (banker_t) * tickets.nb_bankers);
+	}
+	for (int i = 0; i < tickets.nb_bankers; i++) {
+		bankers_data[i].customers_list = customers_list;
+    bankers_data[i].tickets = &tickets;
+    bankers_data[i].nb_customers = nb_customers;
+	}
 
 	// creating customers threads and banker(s) threads
 	customers = create_customers (nb_customers, &tickets, prob, customers_list);
-	banker = create_banks (&bankers_data);
+	banker = create_banks (bankers_data);
 
 	// waiting for customers threads and banker(s) threads
 	for (int i = 0; i < nb_customers; i++) {
@@ -64,6 +72,7 @@ int main (int argc, char **argv) {
 	free (customers_list);
 	free (customers);
 	free (banker);
+	free (bankers_data);
 
 	return EXIT_SUCCESS;
 }

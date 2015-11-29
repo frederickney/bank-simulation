@@ -14,6 +14,11 @@ void *customer (void *argv) {
 	entering_into_bank:
 		customer_data->customer->ticket = get_ticket ((customer_data->tickets)); // taking ticket
 		current_tmp = get_current ((customer_data->tickets)); // taking current ticket
+		if (current_tmp < 0) {
+			initialize (customer_data->tickets);
+			//printf("%d wait %d\n", get_waiting_customers (customer_data->tickets), current_tmp);
+			sem_wait (&(customer_data->tickets->initializing_bank));
+		}
 		if ((customer_data->customer->ticket - current_tmp) > (3 * nb_bankers)) {
 		  if (random_prob() < customer_data->prob) {
 				sleep (customer_data->tickets->serve_time * (customer_data->customer->ticket - current_tmp) / nb_bankers);// doing something

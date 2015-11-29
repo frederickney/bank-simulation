@@ -14,6 +14,7 @@ typedef struct {
 	tickets_t *tickets;
 	int nb_customers;
 	unsigned int current;
+	unsigned int serve_customer;
 } banker_t;
 
 void *banker (void *argv);
