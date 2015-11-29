@@ -9,16 +9,13 @@ void *customer (void *argv) {
 	int nb_bankers = customer_data->tickets->nb_bankers;
 	while (true) {
 		customer_data->customer->in_bank = 0;
-		sleep(customer_data->tickets->serve_time * random_activity(1, 10));// doing something with random
-		//sleep(customer_data->tickets->serve_time * 10); // doing something without random
+		do {
+			sleep(customer_data->tickets->serve_time * random_activity(1, 10));// doing something with random
+			//sleep(customer_data->tickets->serve_time * 10); // doing something without random
+		} while (!customer_data->tickets->opening_bank);
 	entering_into_bank:
 		customer_data->customer->ticket = get_ticket ((customer_data->tickets)); // taking ticket
 		current_tmp = get_current ((customer_data->tickets)); // taking current ticket
-		if (current_tmp < 0) {
-			initialize (customer_data->tickets);
-			//printf("%d wait %d\n", get_waiting_customers (customer_data->tickets), current_tmp);
-			sem_wait (&(customer_data->tickets->initializing_bank));
-		}
 		if ((customer_data->customer->ticket - current_tmp) > (3 * nb_bankers)) {
 		  if (random_prob() < customer_data->prob) {
 				sleep (customer_data->tickets->serve_time * (customer_data->customer->ticket - current_tmp) / nb_bankers);// doing something

@@ -12,9 +12,7 @@ typedef struct {
 	unsigned int serve_time;
 	sem_t sem_banker;
 	int nb_bankers;
-	sem_t initializing_bank;
-	unsigned int nb_customers_waiting;
-	sem_t customers_waiting;
+	short unsigned int opening_bank;
 } tickets_t;
 
 tickets_t get_tickets_t();

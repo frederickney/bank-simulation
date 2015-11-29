@@ -15,6 +15,7 @@ typedef struct {
 	int nb_customers;
 	unsigned int current;
 	unsigned int serve_customer;
+	short unsigned int in_bank;
 } banker_t;
 
 void *banker (void *argv);
